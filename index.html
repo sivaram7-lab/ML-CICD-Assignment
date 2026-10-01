@@ -1,22 +1,431 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 <head>
-    <title>ML CI/CD Assignment</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>ML CI/CD Dashboard</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f5f7fb;
+        color: #1f2937;
+    }
+
+    /* Navbar */
+    .navbar {
+        background: #111827;
+        color: white;
+        padding: 18px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .status {
+        background: #166534;
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 14px;
+    }
+
+    /* Hero */
+    .hero {
+        padding: 70px 7%;
+        background: linear-gradient(135deg, #111827, #1e3a8a);
+        color: white;
+    }
+
+    .hero-content {
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+        margin-bottom: 18px;
+    }
+
+    .hero p {
+        font-size: 18px;
+        line-height: 1.7;
+        max-width: 700px;
+        color: #dbeafe;
+    }
+
+    /* Main */
+    .container {
+        max-width: 1100px;
+        margin: -35px auto 60px;
+        padding: 0 20px;
+        position: relative;
+    }
+
+    /* Cards */
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+    }
+
+    .card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+        border: 1px solid #e5e7eb;
+    }
+
+    .card .icon {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .card h3 {
+        font-size: 14px;
+        color: #6b7280;
+        margin-bottom: 8px;
+    }
+
+    .card p {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .accuracy {
+        color: #15803d;
+    }
+
+    /* Sections */
+    .section {
+        background: white;
+        margin-top: 25px;
+        padding: 30px;
+        border-radius: 15px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .section h2 {
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+
+    .section-description {
+        color: #6b7280;
+        margin-bottom: 25px;
+    }
+
+    /* Pipeline */
+    .pipeline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .pipeline-step {
+        flex: 1;
+        text-align: center;
+    }
+
+    .pipeline-icon {
+        width: 55px;
+        height: 55px;
+        margin: auto;
+        border-radius: 50%;
+        background: #dcfce7;
+        color: #166534;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .pipeline-step h4 {
+        margin-top: 10px;
+    }
+
+    .pipeline-step p {
+        margin-top: 5px;
+        color: #6b7280;
+        font-size: 13px;
+    }
+
+    .arrow {
+        font-size: 25px;
+        color: #9ca3af;
+    }
+
+    /* Technology */
+    .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .tech {
+        padding: 10px 16px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+        background: #111827;
+        color: #9ca3af;
+        text-align: center;
+        padding: 25px;
+        margin-top: 50px;
+    }
+
+    footer strong {
+        color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 850px) {
+        .cards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .pipeline {
+            flex-direction: column;
+        }
+
+        .arrow {
+            transform: rotate(90deg);
+        }
+
+        .hero h1 {
+            font-size: 36px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .cards {
+            grid-template-columns: 1fr;
+        }
+
+        .hero {
+            padding: 50px 6%;
+        }
+
+        .hero h1 {
+            font-size: 30px;
+        }
+
+        .section {
+            padding: 22px;
+        }
+    }
+</style>
+```
+
 </head>
 
 <body>
 
-    <h1>Machine Learning CI/CD Pipeline</h1>
+```
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="logo">ML CI/CD</div>
 
-    <h2>Model Details</h2>
+    <div class="status">
+        ● Pipeline Successful
+    </div>
+</nav>
 
-    <p><strong>ML Model:</strong> Logistic Regression</p>
 
-    <p><strong>Dataset:</strong> Iris Dataset</p>
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
 
-    <p><strong>Model Accuracy:</strong> 100%</p>
+        <div class="badge">
+            Machine Learning Deployment Project
+        </div>
 
-    <p><strong>CI/CD Deployment Status:</strong> Successfully Deployed</p>
+        <h1>Machine Learning CI/CD Pipeline</h1>
+
+        <p>
+            An automated machine learning workflow using
+            Scikit-learn and GitHub Actions. The pipeline
+            automatically trains the model, runs tests and
+            deploys this dashboard using GitHub Pages.
+        </p>
+
+    </div>
+</section>
+
+
+<!-- Main Content -->
+<main class="container">
+
+    <!-- Model Cards -->
+    <section class="cards">
+
+        <div class="card">
+            <div class="icon">🤖</div>
+            <h3>ML MODEL</h3>
+            <p>Logistic Regression</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌸</div>
+            <h3>DATASET</h3>
+            <p>Iris Dataset</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎯</div>
+            <h3>ACCURACY</h3>
+            <p class="accuracy">100%</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🚀</div>
+            <h3>DEPLOYMENT</h3>
+            <p class="accuracy">Successful</p>
+        </div>
+
+    </section>
+
+
+    <!-- Pipeline -->
+    <section class="section">
+
+        <h2>CI/CD Pipeline</h2>
+
+        <p class="section-description">
+            Automated workflow from source code to deployment.
+        </p>
+
+        <div class="pipeline">
+
+            <div class="pipeline-step">
+                <div class="pipeline-icon">1</div>
+                <h4>Code</h4>
+                <p>GitHub Repository</p>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="pipeline-step">
+                <div class="pipeline-icon">2</div>
+                <h4>Build</h4>
+                <p>Python Environment</p>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="pipeline-step">
+                <div class="pipeline-icon">3</div>
+                <h4>Test</h4>
+                <p>Pytest</p>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="pipeline-step">
+                <div class="pipeline-icon">4</div>
+                <h4>Deploy</h4>
+                <p>GitHub Pages</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Project Information -->
+    <section class="section">
+
+        <h2>Project Overview</h2>
+
+        <p class="section-description">
+            This project demonstrates how DevOps practices
+            can be applied to a machine learning workflow.
+        </p>
+
+        <div class="tech-list">
+
+            <div class="tech">Python</div>
+            <div class="tech">Scikit-learn</div>
+            <div class="tech">Iris Dataset</div>
+            <div class="tech">Pytest</div>
+            <div class="tech">GitHub Actions</div>
+            <div class="tech">GitHub Pages</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Status -->
+    <section class="section">
+
+        <h2>Deployment Status</h2>
+
+        <p class="section-description">
+            The CI/CD workflow has successfully completed.
+        </p>
+
+        <div style="
+            padding: 18px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            color: #166534;
+            font-weight: bold;
+        ">
+            ✓ CI Passed &nbsp;&nbsp; → &nbsp;&nbsp;
+            ✓ Tests Passed &nbsp;&nbsp; → &nbsp;&nbsp;
+            ✓ CD Passed &nbsp;&nbsp; → &nbsp;&nbsp;
+            ✓ Website Deployed
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Footer -->
+<footer>
+    <p>
+        <strong>ML CI/CD Assignment</strong>
+        &nbsp; | &nbsp;
+        Built with Python, Scikit-learn & GitHub Actions
+    </p>
+</footer>
+```
 
 </body>
 </html>
